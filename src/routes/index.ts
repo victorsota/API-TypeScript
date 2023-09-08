@@ -7,6 +7,8 @@ import { MongoCreateUserRepository } from "../repositories/get-users/create-user
 import { CreateUserController } from "../controllers/create-user/create-user";
 import { MongoUpdateUserReporsitory } from "../repositories/update-user/mongo-update-user";
 import { UpdateUserController } from "../controllers/update-user/update-user";
+import { MongoDeleteUserRepository } from "../repositories/delete-user/mongo-delete-user";
+import { DeleteUserController } from "../controllers/delete-user/delete-user";
 
 config();
 export const router = Router();
@@ -41,7 +43,7 @@ const main = async () => {
   });
 
   //Atualizando Usuario
-  router.put("/users/:id", async (req, res) => {
+  router.patch("/users/:id", async (req, res) => {
     const mongoUpdateUserRepository = new MongoUpdateUserReporsitory();
 
     const updateUserController = new UpdateUserController(
@@ -49,6 +51,22 @@ const main = async () => {
     );
 
     const { body, statusCode } = await updateUserController.handle({
+      body: req.body,
+      params: req.params,
+    });
+
+    res.status(statusCode).send(body);
+  });
+
+  //Deletando Usuario
+  router.delete("/users/:id", async (req, res) => {
+    const mongoDeleteUserRepository = new MongoDeleteUserRepository();
+
+    const deleteUserController = new DeleteUserController(
+      mongoDeleteUserRepository
+    );
+
+    const { body, statusCode } = await deleteUserController.handle({
       body: req.body,
       params: req.params,
     });
