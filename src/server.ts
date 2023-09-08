@@ -1,23 +1,22 @@
-import { app }  from './app'
+import { app } from "./app";
 
-const porta = process.env.PORT  || 5000
-
-
+const porta = process.env.PORT || 3000;
 
 /**
- * 
+ *
  * Iniciar o servidor
  */
 
-const server = app.listen(porta, () => console.log(`App ouvindo na porta ${porta}`))
-
+const server = app.listen(porta, () =>
+  console.log(`App ouvindo na porta ${porta}`)
+);
 
 /**
- * 
+ *
  * Encerra o servidor
  */
 
-process.on('SIGINT', () => {
-    server.close
-    console.log('App finalizado')
-})
+process.on("SIGINT", () => {
+  server.close;
+  console.log("App finalizado");
+});
