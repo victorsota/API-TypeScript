@@ -1,5 +1,8 @@
-import { Router } from 'express'
+import { Router } from "express";
+import { config } from "dotenv";
 
-export const router = Router()
+config();
 
-router.get('/', (req, res) => res.send('API COM EXPRESS E TS'))
+export const router = Router();
+
+router.get("/", (req, res) => res.send("API COM EXPRESS E TS"));
